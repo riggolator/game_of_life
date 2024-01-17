@@ -271,23 +271,27 @@ void grids::game_play() {
         _next_grid._grid.at(rows).at(cols).curr_state = cell::DEAD;
       }
 
-      if (_next_grid._grid.at(rows).at(cols).curr_state == cell::ALIVE) {
-        std::cout << "x: " << cols << " y: " << rows << " neighbors: " << n_num
-                  << std::endl;
-      }
+      // if (_next_grid._grid.at(rows).at(cols).curr_state == cell::ALIVE) {
+      std::cout << cell.neighbor_dl_state << std::endl;
+      std::cout << "x: " << cols << " y: " << rows << " neighbors: \n"
+                << "down left:\t" << cell.neighbor_dl_state << "\n"
+                << "down right:\t" << cell.neighbor_dr_state << "\n"
+                << "down middle:\t" << cell.neighbor_dm_state << "\n"
+                << "right:\t\t" << cell.neighbor_mr_state << "\n"
+                << "up right:\t" << cell.neighbor_ur_state << "\n"
+                << "up middle:\t" << cell.neighbor_um_state << "\n"
+                << "up left:\t" << cell.neighbor_ul_state << "\n"
+                << "middle left:\t" << cell.neighbor_ml_state << "\n"
+                << std::endl;
+      //}
       cell.neighbors.clear();
       cols++;
     }
     rows++;
   }
-  std::cout << "size next_grid: " << _next_grid._grid.size() << std::endl;
   _current_grid = std::move(_next_grid);
 
-  std::cout << "size next_grid after move: " << _next_grid._grid.size()
-            << std::endl;
   _next_grid.init();
-  std::cout << "size next_grid after init: " << _next_grid._grid.size()
-            << std::endl;
   _current_grid.draw();
 }
 
@@ -296,10 +300,10 @@ void grids::execute() {
   _current_grid.fill_neighbors_vec_for_counting();
   _current_grid.draw();
   while (true) {
-    // std::cin.get();
+    std::cin.get();
     grids::game_play();
     _current_grid.fill_neighbors_vec_for_counting();
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    system("clear");
+    // system("clear");
   }
 }
