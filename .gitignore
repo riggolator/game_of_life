@@ -1,0 +1,5 @@
+.cache/
+.codechecker/
+.vscode/
+compile_commands.json
+build/
