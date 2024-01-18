@@ -13,7 +13,7 @@
 #include <vector>
 
 void grid::set_size() {
-  _grid.resize(_cols, std::vector<cell>(_rows));
+  _grid.resize(_rows, std::vector<cell>(_cols));
   // std::cout << "size set" << std::endl;
 }
 
@@ -25,13 +25,29 @@ std::vector<std::tuple<std::string, int>> grid::get_size() {
   // vals.push_back(std::tuple<std::string, int>{"rows", rows});
   return vals;
 }
-std::string state_symbol(bool state) { return state ? "X" : " "; }
+std::string state_symbol(bool state) {
+  return state ? "\033[1;34mX\033[0m" : " ";
+}
 
 void grid::draw() {
 
   // system("clear");
   std::cout << "Welcome to Conway's game of life!" << std::endl;
-  std::cout << " 0.1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6.7.8.9" << std::endl;
+  int col_counter = 0;
+  std::string grid_head;
+  for (auto const &cell : _grid.at(0)) {
+    if (col_counter == 0) {
+      grid_head = grid_head + "\033[1;31m" + std::to_string(col_counter) +
+                  "\033[0m" + ".";
+    } else {
+      grid_head = grid_head + std::to_string(col_counter) + ".";
+    }
+    col_counter++;
+    if (col_counter == 10) {
+      col_counter = 0;
+    }
+  }
+  std::cout << " " << grid_head << std::endl;
   int rows = 0;
   for (auto const &row : _grid) {
     for (auto const &col : row) {
@@ -46,7 +62,13 @@ void grid::draw() {
           // return;
         //}
       } else {
-        std::cout << "| " << rows << "\n";
+        if (col.curr_state == cell::ALIVE) {
+          std::cout << "|" << state_symbol(true);
+        }
+        if (col.curr_state == cell::DEAD) {
+          std::cout << "|" << state_symbol(false);
+        } // else if (col.curr_state == cell::INVALID) {
+        std::cout << "|" << rows << "\n";
       }
     }
     rows++;
@@ -59,8 +81,8 @@ void grid::set_cell_state(cell &cell, bool state) {
 }
 void grid::init() {
 
-  _cols = 20;
-  _rows = 20;
+  _cols = 65;
+  _rows = 30;
   set_size();
   int rows = 0;
   for (auto &row : _grid) {
@@ -75,6 +97,13 @@ void grid::init() {
     rows++;
   }
 }
+void grid::square() {
+  set_cell_state(_grid.at(7).at(8), true);
+  set_cell_state(_grid.at(7).at(9), true);
+  set_cell_state(_grid.at(8).at(8), true);
+  set_cell_state(_grid.at(8).at(9), true);
+}
+
 void grid::set_start_condition() {
   set_cell_state(_grid.at(7).at(8), true);
   set_cell_state(_grid.at(8).at(9), true);
@@ -271,19 +300,19 @@ void grids::game_play() {
         _next_grid._grid.at(rows).at(cols).curr_state = cell::DEAD;
       }
 
-      // if (_next_grid._grid.at(rows).at(cols).curr_state == cell::ALIVE) {
-      // std::cout << cell.neighbor_dl_state << std::endl;
-      // std::cout << "x: " << cols << " y: " << rows << " neighbors: \n"
-      //<< "down left:\t" << cell.neighbor_dl_state << "\n"
-      //<< "down right:\t" << cell.neighbor_dr_state << "\n"
-      //<< "down middle:\t" << cell.neighbor_dm_state << "\n"
-      //<< "right:\t\t" << cell.neighbor_mr_state << "\n"
-      //<< "up right:\t" << cell.neighbor_ur_state << "\n"
-      //<< "up middle:\t" << cell.neighbor_um_state << "\n"
-      //<< "up left:\t" << cell.neighbor_ul_state << "\n"
-      //<< "middle left:\t" << cell.neighbor_ml_state << "\n"
-      //<< std::endl;
-      //}
+      if (_next_grid._grid.at(rows).at(cols).curr_state == cell::ALIVE) {
+        // std::cout << cell.neighbor_dl_state << std::endl;
+        // std::cout << "x: " << cols << " y: " << rows << " neighbors: \n"
+        //<< "down left:\t" << cell.neighbor_dl_state << "\n"
+        //<< "down right:\t" << cell.neighbor_dr_state << "\n"
+        //<< "down middle:\t" << cell.neighbor_dm_state << "\n"
+        //<< "right:\t\t" << cell.neighbor_mr_state << "\n"
+        //<< "up right:\t" << cell.neighbor_ur_state << "\n"
+        //<< "up middle:\t" << cell.neighbor_um_state << "\n"
+        //<< "up left:\t" << cell.neighbor_ul_state << "\n"
+        //<< "middle left:\t" << cell.neighbor_ml_state << "\n"
+        //<< std::endl;
+      }
       cell.neighbors.clear();
       cols++;
     }

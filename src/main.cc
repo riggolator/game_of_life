@@ -12,6 +12,7 @@
 int main() {
   grids grids;
   grids._current_grid.init();
+  // grids._current_grid.square();
   grids._current_grid.set_start_condition();
 
   grids._next_grid.init();

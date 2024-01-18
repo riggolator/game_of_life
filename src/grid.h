@@ -26,6 +26,7 @@ public:
   void fill_neighbors_vec_for_counting();
   // void game_play();
   // void execute();
+  void square();
   void set_start_condition();
   std::vector<std::vector<cell>> _grid;
 };
