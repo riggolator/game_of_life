@@ -10,22 +10,19 @@
 #include <tuple>
 #include <vector>
 
+struct position {
+  int x;
+  int y;
+};
+
 class cell {
 
 public:
-  enum cell_state { INVALID, DEAD, ALIVE };
+  enum cell_state { DEAD, ALIVE };
   cell_state curr_state;
   cell_state next_state;
+  position cell_position;
 
-  cell_state neighbor_ul_state;
-  cell_state neighbor_um_state;
-  cell_state neighbor_ur_state;
-  cell_state neighbor_ml_state;
-  cell_state neighbor_mr_state;
-  cell_state neighbor_dl_state;
-  cell_state neighbor_dm_state;
-  cell_state neighbor_dr_state;
-
-  std::vector<cell_state> neighbors;
-  // cell() : curr_state(ALIVE) {}
+  void set_state(bool const &state);
+  cell wrap_cell(int const &x, int const &y);
 };

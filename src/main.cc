@@ -10,15 +10,18 @@
 #include <vector>
 
 int main() {
-  grids grids;
-  grids._current_grid.init();
+  grid grid;
+  grid.init(grid._grid);
+  grid.init(grid._next_grid);
   // grids._current_grid.square();
-  grids._current_grid.set_start_condition();
+  grid.diamond();
+  grid.glider_gun();
+  grid.set_start_condition();
 
-  grids._next_grid.init();
+  // grids._next_grid.init();
 
-  grids._current_grid.draw();
-  grids.execute();
+  //  grids._current_grid.draw();
+  grid.execute();
   return 0;
 }
 
