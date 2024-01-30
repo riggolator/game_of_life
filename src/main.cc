@@ -14,9 +14,9 @@ int main() {
   grid.init(grid._grid);
   grid.init(grid._next_grid);
   // grids._current_grid.square();
-  grid.diamond();
+  // grid.diamond();
   grid.glider_gun();
-  grid.set_start_condition();
+  // grid.set_start_condition();
 
   // grids._next_grid.init();
 

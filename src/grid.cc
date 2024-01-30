@@ -139,12 +139,51 @@ void grid::diamond() {
 }
 
 void grid::glider_gun() {
-  square(20, 10);
-  square(54, 8);
+  square(20, 9);
+  square(54, 7);
   set_cell_state(30, 10, true);
   set_cell_state(30, 11, true);
   set_cell_state(30, 9, true);
-  set_cell_state(30, 10, true);
+
+  set_cell_state(31, 8, true);
+  set_cell_state(32, 7, true);
+  set_cell_state(33, 7, true);
+
+  set_cell_state(31, 12, true);
+  set_cell_state(32, 13, true);
+  set_cell_state(33, 13, true);
+
+  set_cell_state(34, 10, true);
+
+  set_cell_state(35, 8, true);
+  set_cell_state(36, 9, true);
+  set_cell_state(36, 10, true);
+  set_cell_state(37, 10, true);
+  set_cell_state(36, 11, true);
+  set_cell_state(35, 12, true);
+
+  set_cell_state(40, 9, true);
+  set_cell_state(41, 9, true);
+  set_cell_state(40, 8, true);
+  set_cell_state(41, 8, true);
+  set_cell_state(40, 7, true);
+  set_cell_state(41, 7, true);
+  set_cell_state(42, 6, true);
+  set_cell_state(42, 10, true);
+
+  set_cell_state(44, 6, true);
+  set_cell_state(44, 5, true);
+
+  set_cell_state(44, 11, true);
+  set_cell_state(44, 12, true);
+
+  set_cell_state(43, 16, true);
+  set_cell_state(44, 16, true);
+  set_cell_state(43, 17, true);
+  set_cell_state(44, 18, true);
+  set_cell_state(45, 18, true);
+  set_cell_state(46, 18, true);
+  set_cell_state(46, 19, true);
 }
 void grid::set_start_condition() {
   int x = 0;
